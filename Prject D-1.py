@@ -1,5 +1,5 @@
 import random
-
+import time
 #"random number selection"
 #def Roll():
     #global waw
@@ -31,32 +31,39 @@ Turns=0
 #Math PONG
 
 def Subtracting():
-    global Center
+    global Net
     global Ball
     global Turns
     global waw
-    while Ball>Center:
-        Roll()
+    if waw<0:
+        Ball=Ball-waw
+        waw=waw*-1
+        print(f"Adding {waw}")
+    else:
         print(f"Subtracting {waw}")
         Ball=Ball-waw
-        Turns=Turns+1
-      
-        print(Ball)
-        print()
+    Turns=Turns+1
+    print(Ball)
+    print()
     
    
 
 def Adding():
-    global Center
+    global Net
     global Ball
     global Turns
     global waw
-    while Ball<Center:
-        Roll()
+    Roll()
+    if waw<0:
+        Ball=Ball+waw
+        waw=waw*-1
+        print(f"Subtracting {waw}")
+    else:
         print(f"Adding {waw}")
         Ball=Ball+waw
+
+
         Turns=Turns+1
-      
         print(Ball)
         print()
 
@@ -77,7 +84,7 @@ elif Maximum-Minumum<1:
 else:
      print()
           
-Center=int(input("What Number Do You Wish The Center To Be  "))
+Net=int(input("What Number Do You Wish The Net To Be  "))
      
  
          
@@ -107,26 +114,27 @@ BallFinder()
 #DDFFFFF
 Roll()
 
-if Ball==Center:
+if Ball==Net:
     Ball=Ball+waw
     print(Ball)
 else:
     print(Ball)
 
-
-
-
-     
-
-if Ball>=Center:
-    while Ball!=Center:
+start_time = time.time()
+trutime=time.time()
+duration=10
+while trutime < start_time + duration: 
+    trutime=time.time()  
+    Turns=Turns+1 
+    if Ball>Net:
         Subtracting()
-        Adding()
            
-elif Ball<Center:
-    while Ball!=Center:
+    elif Ball<Net:
         Adding()
-        Subtracting()
+    else:
+        trutime=time.time()+duration
+        
+print(f"It Looped {Turns} Times")
+
           
 
-print(f"It Looped {Turns} Times")
