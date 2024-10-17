@@ -8,12 +8,19 @@ import random
  #   global Minumum
 # import random
 
+#def Roll():
+    #global numberlist
+    #random_numbers = {random.randint(Minumum,Maximum) for _ in range(1)}  
+   # waw =random_numbers[0]
+
+
 def Roll():
     global Maximum
     global Minumum
     global waw
     import random
-    waw=random.randint(Minumum, Maximum)
+    random_number=random.randint(Minumum, Maximum) 
+    waw = random_number
    
     #random_numbers = {random.randint(Minumum,Maximum) for _ in range(1)}  
     #numberlist = list(random_numbers)
@@ -27,53 +34,39 @@ def Subtracting():
     global Center
     global Ball
     global Turns
+    global waw
     while Ball>Center:
         Roll()
-        print("subtracting")
+        print(f"Subtracting {waw}")
         Ball=Ball-waw
         Turns=Turns+1
-    print(Ball)
+      
+        print(Ball)
+        print()
+    
    
 
 def Adding():
     global Center
     global Ball
     global Turns
+    global waw
     while Ball<Center:
         Roll()
-        print("adding")
+        print(f"Adding {waw}")
         Ball=Ball+waw
         Turns=Turns+1
-    print(Ball)
+      
+        print(Ball)
+        print()
 
-def notSubtracting():
-    global Center
-    global Ball
-    global Turns
-    while Ball>Center:
-        Roll()
-        print("Adding")
-        Ball=Ball+waw
-        Turns=Turns+1
-    print(Ball)
-
-def notAdding():
-    global Center
-    global Ball
-    global Turns
-    while Ball<Center:
-        Roll()
-        print("Subtracting")
-        Ball=Ball-waw
-        Turns=Turns+1
-    print(Ball)
 
 
 print()
-Maximum=int(input("What is the maximum change you wish applied    "))
+Maximum=int(input("Maximum   "))
 
 
-Minumum=int(input("What is the minumum change you wish applied   "))
+Minumum=int(input("Minumum   "))
 if Minumum>Maximum:
      while Minumum>Maximum:
           print("The Minumum can not be more than the Maximum   ")
@@ -89,23 +82,31 @@ Center=int(input("What Number Do You Wish The Center To Be  "))
  
          
 
-Guess=int(input("How Times Do You Think It Will Loop  - "))
-while Guess<0:
-    print("Please Input 0 Or Greater")
-    Guess=int(input("How Times Do You Think It Will Loop   "))
 
 
-def Run():
-    global Ball
-    global numberlist
-    random_numbers = {random.randint(-100,100) for _ in range(1)}  
-    numberlist = list(random_numbers)
-    Ball=numberlist[0]
- 
+
+def BallFinder (): 
+
+    Ballmin=0
+    Ballmax=0
+    while Ballmin==Ballmax:
+        global Ball
+        Roll()
+        Ballmin=waw
+        Roll()
+        Ballmax=waw
+    if Ballmin>Ballmax: 
+        random_numbers = random.randint(Ballmax,Ballmin) 
+        Ball=random_numbers
+    elif Ballmax>Ballmin:
+        random_numbers = random.randint(Ballmin,Ballmax) 
+        Ball=random_numbers
+
+BallFinder() 
 
 #DDFFFFF
 Roll()
-Run()
+
 if Ball==Center:
     Ball=Ball+waw
     print(Ball)
@@ -114,47 +115,18 @@ else:
 
 
 
-if Maximum<1:
-     if Ball>Center:
-        while Ball!=Center:
-            notSubtracting()
-            notAdding()
-          
-                 
-     elif Ball<Center:
-            while Center!=Ball:
-                notAdding()
-                notSubtracting()
-            
-                
-               
 
-     else:
-         print("Eror 404 Number Not Found")
      
-elif Maximum>=1:
-     if Ball>=Center:
-        while Ball!=Center:
-            Subtracting()
-            Adding()
+
+if Ball>=Center:
+    while Ball!=Center:
+        Subtracting()
+        Adding()
            
-
-     elif Ball<Center:
-        while Ball!=Center:
-            Adding()
-            Subtracting()
+elif Ball<Center:
+    while Ball!=Center:
+        Adding()
+        Subtracting()
           
 
-     else:
-          
-        print("Eror 404 Number Not Found")
-
-else:
-     print("eror 405")
-
-
-if Guess==Turns:
-    print("You Win")
-else:
-    print("You Lose")
-    print(f"It Looped {Turns} Times")
+print(f"It Looped {Turns} Times")
